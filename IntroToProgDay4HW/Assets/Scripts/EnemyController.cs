@@ -2,29 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+using Main.Character;
+using Main.Utlities;
 using AnimatorController;
 
-public class EnemyController : MonoBehaviour
+
+namespace Main.Character
 {
-
-    [SerializeField] Transform playerPosition;
-    NavMeshAgent nav;
-
-    // Start is called before the first frame update
-    void Start()
+    public class EnemyController : MonoBehaviour
     {
-        nav = GetComponent<NavMeshAgent>();
-    }
+        //data feilds
+        [SerializeField] Transform playerPosition;
+        NavMeshAgent nav;
 
-    // Update is called once per frame
-    void Update()
-    {
-        nav.SetDestination(playerPosition.position);
-        nav.speed += 0.001f;
-        if(nav.speed > 7)
+        // Start is called before the first frame update
+        void Start()
         {
-            nav.speed = 7;
+            nav = GetComponent<NavMeshAgent>();
         }
 
+        // Update is called once per frame
+        void Update()
+        {
+            //move the enemy to the payer
+            nav.SetDestination(playerPosition.position);
+            nav.speed += 0.002f;
+            if (nav.speed > 4)
+            {
+                nav.speed = 4;
+            }
+        }
     }
 }
+
